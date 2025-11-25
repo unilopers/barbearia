@@ -1,0 +1,28 @@
+*   [33m9a9b475[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Merge branch 'main' of github.com:unilopers/barbearia
+[31m|[m[32m\[m  
+[31m|[m * [33m815efba[m :sparkles: feat: Adiciona Model ao Cliente
+* [32m|[m [33m66a2591[m :sparkles: feat: Cria view ProdutoVenda
+* [32m|[m [33m85f0101[m :sparkles: feat: Cria model VendaProduto
+* [32m|[m [33med59d1d[m :sparkles: feat: Cria view Venda
+* [32m|[m [33m85f4e6a[m :sparkles: feat: Cria model Venda
+* [32m|[m [33m01d1bff[m :sparkles: feat: Cria view PacoteServico
+* [32m|[m [33m6d3eeef[m :sparkles: feat: Cria o model PacoteServico
+* [32m|[m [33ma4d1d14[m :bug: fix: Adiciona respostas mais descritivas para as requisições
+* [32m|[m   [33m9f0ffce[m Merge branch 'main' of github.com:unilopers/barbearia
+[33m|[m[34m\[m [32m\[m  
+[33m|[m * [32m\[m   [33m9383256[m :sparkles:feat: Adicionando Controller Servico ao Sistema
+[33m|[m [35m|[m[36m\[m [32m\[m  
+[33m|[m [35m|[m * [32m|[m [33m1ca759f[m Adicionando linha de teste para GitHub
+[33m|[m [35m|[m * [32m|[m [33m187aa76[m Update README.md
+[33m|[m [35m|[m * [32m|[m [33m5101082[m Update README.md
+[33m|[m [35m|[m [32m|[m[32m/[m  
+[33m|[m [35m|[m * [33m7bcab4a[m :sparkles: feat: adicionar ProdutoController ao projeto
+[33m|[m [35m|[m *   [33ma1310a0[m Merge branch 'main' of github.com:unilopers/barbearia
+[33m|[m [35m|[m [1;31m|[m[1;32m\[m  
+[33m|[m [35m|[m * [1;32m|[m [33md333c16[m ✨  feat: adiciona model ao Cliente
+[33m|[m * [1;32m|[m [1;32m|[m [33md411198[m :sparkles:feat: Adicionar Controller Cliente ao Sistema
+[33m|[m * [1;32m|[m [1;32m|[m   [33m228a863[m :sparkles: Adicionando a View Servico ao Projeto
+[33m|[m [1;33m|[m[1;34m\[m [1;32m\[m [1;32m\[m  
+* [1;33m|[m [1;34m|[m [1;32m|[m [1;32m|[m [33m2edd224[m :bug: fix: Adiciona getters e setters em Funcionarios
+[1;32m|[m [1;33m|[m[1;32m_[m[1;34m|[m[1;32m_[m[1;32m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m[1;33m|[m [1;34m|[m [1;32m|[m   

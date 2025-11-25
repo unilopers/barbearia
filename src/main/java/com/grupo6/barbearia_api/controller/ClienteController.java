@@ -8,6 +8,7 @@ import com.grupo6.barbearia_api.view.ClienteView;
 import java.util.List;
 @RestController
 @RequestMapping("/clientes")
+
 public class ClienteController {
     @Autowired
     private ClienteView clienteView;
