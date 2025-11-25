@@ -1,71 +1,149 @@
 package com.grupo6.barbearia_api.controller;
+
 import com.grupo6.barbearia_api.model.Cliente;
+import com.grupo6.barbearia_api.view.ClienteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.grupo6.barbearia_api.view.ClienteView;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/clientes")
-
 public class ClienteController {
+
     @Autowired
     private ClienteView clienteView;
     @GetMapping
-    public List<Cliente> listar() throws Exception {
+    public ResponseEntity<?> listar() {
         try {
-            return clienteView.findAll();
+            List<Cliente> clientes = clienteView.findAll();
+
+            if (clientes.isEmpty()) {
+                return ResponseEntity.ok(criarResposta(
+                        "sucesso",
+                        "Nenhum cliente cadastrado",
+                        clientes
+                ));
+            }
+
+            return ResponseEntity.ok(criarResposta(
+                    "sucesso",
+                    clientes.size() + ": Cliente(s) encontrado(s)",
+                    clientes
+            ));
         } catch (Exception e) {
-            throw new Exception("Erro ao listar os clientes no banco");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(criarResposta(
+                    "erro",
+                    "Erro ao listar clientes: " + e.getMessage(),
+                    null
+            ));
         }
     }
     @GetMapping("/{id}")
-
-    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) throws Exception {
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
             return clienteView.findById(id)
-                    .map(clienteEncontrado -> ResponseEntity.ok(clienteEncontrado))
-                    .orElse(ResponseEntity.notFound().build());
+                    .map(cliente -> ResponseEntity.ok(criarResposta(
+                            "sucesso",
+                            "Cliente encontrado com sucesso",
+                            cliente
+                    )))
+                    .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(criarResposta(
+                            "erro",
+                            "Cliente com ID '" + id + "' não encontrado",
+                            null
+                    )));
         } catch (Exception e) {
-            throw new Exception("Erro ao buscar os clientes no banco");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(criarResposta(
+                    "erro",
+                    "Erro ao buscar cliente: " + e.getMessage(),
+                    null
+            ));
         }
     }
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-
-    public Cliente criar(@RequestBody Cliente cliente) throws Exception {
+    public ResponseEntity<?> criar(@RequestBody Cliente cliente) {
         try {
-            return clienteView.save(cliente);
+            Cliente salvo = clienteView.save(cliente);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(criarResposta(
+                    "sucesso",
+                    "Cliente '" + salvo.getNome() + "' criado com sucesso",
+                    salvo
+            ));
         } catch (Exception e) {
-            throw new Exception("Erro ao criar os clientes no banco");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(criarResposta(
+                    "erro",
+                    "Erro ao criar cliente: " + e.getMessage(),
+                    null
+            ));
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente clienteDetalhes) throws Exception {
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
         try {
             if (!clienteView.existsById(id)) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(criarResposta(
+                        "erro",
+                        "Cliente com ID '" + id + "' não encontrado",
+                        null
+                ));
             }
-            clienteDetalhes.setId(id);
-            Cliente clienteAtualizado = clienteView.save(clienteDetalhes);
-            return ResponseEntity.ok(clienteAtualizado);
+
+            cliente.setId(id);
+            Cliente atualizado = clienteView.save(cliente);
+
+            return ResponseEntity.ok(criarResposta(
+                    "sucesso",
+                    "Cliente com ID '" + id + "' atualizado com sucesso",
+                    atualizado
+            ));
         } catch (Exception e) {
-            throw new Exception("Erro ao atualizar os clientes no banco");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(criarResposta(
+                    "erro",
+                    "Erro ao atualizar cliente: " + e.getMessage(),
+                    null
+            ));
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) throws Exception {
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
         try {
             if (!clienteView.existsById(id)) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(criarResposta(
+                        "erro",
+                        "Cliente com ID '" + id + "' não encontrado",
+                        null
+                ));
             }
+
+            Cliente cliente = clienteView.findById(id).get();
+            String nome = cliente.getNome();
+
             clienteView.deleteById(id);
-            return ResponseEntity.noContent().build();
+
+            return ResponseEntity.ok(criarResposta(
+                    "sucesso",
+                    "Cliente '" + nome + "' deletado com sucesso",
+                    null
+            ));
         } catch (Exception e) {
-            throw new Exception("Erro ao deletar os clientes no banco");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(criarResposta(
+                    "erro",
+                    "Erro ao deletar cliente: " + e.getMessage(),
+                    null
+            ));
         }
     }
-
-
+    private Map<String, Object> criarResposta(String status, String mensagem, Object dados) {
+        Map<String, Object> resposta = new HashMap<>();
+        resposta.put("status", status);
+        resposta.put("mensagem", mensagem);
+        resposta.put("dados", dados);
+        return resposta;
+    }
 }
