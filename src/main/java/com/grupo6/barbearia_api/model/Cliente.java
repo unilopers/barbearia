@@ -12,9 +12,9 @@ public class Cliente {
     private Long id;
     @Column(nullable = false, length = 100)
     private String nome;
-    @Column(nullable = false, lenght = 20)
+    @Column(nullable = false, length = 20)
     private String telefone;
-    @Column(unique = true, lenght = 14)
+    @Column(unique = true, length = 14)
     private String cpf;
     @Column (name = "data_nascimento")
     private LocalDate data_Nascimento;
@@ -25,6 +25,5 @@ public class Cliente {
     @Column (name = "data_cadastro",
     nullable = false, updatable = false)
     private LocalDateTime dataCadastro = LocalDateTime.now();
-
 
 }
