@@ -1,13 +1,11 @@
 package com.grupo6.barbearia_api.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="funcionario")
-public class Funcionario {
+@Table(name = "fornecedor")
+public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,31 +13,29 @@ public class Funcionario {
     @Column(nullable = false, length = 100)
     private String nome;
 
+    @Column(unique = true, length = 18)
+    private String cnpj;
+
     @Column(nullable = false, length = 20)
     private String telefone;
 
     @Column(length = 100)
     private String email;
 
-    @Column(nullable = false, unique = true, length = 14)
-    private String cpf;
+    @Column (length = 225)
+    private String endereço;
 
-    @Column(nullable = false, length = 50)
-    private String cargo;
-
-    @Column(nullable = false)
-    private BigDecimal percentualComissao;
+    @Lob
+    private String observacoes;
 
     @Column(nullable = false)
     private boolean ativo = true;
 
-    @Column(name = "data_admissao", nullable = false)
-    private LocalDate dataAdmissao;
-
     @Column(name = "data_cadastro", nullable = false, updatable = false)
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
-
+    
+    
     public Long getId() {
         return id;
     }
@@ -56,6 +52,14 @@ public class Funcionario {
         this.nome = nome;
     }
 
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -63,7 +67,7 @@ public class Funcionario {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
+  
     public String getEmail() {
         return email;
     }
@@ -72,28 +76,20 @@ public class Funcionario {
         this.email = email;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEndereço() {
+        return endereço;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEndereço(String endereço) {
+        this.endereço = endereço;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getObservacoes() {
+        return observacoes;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public BigDecimal getPercentualComissao() {
-        return percentualComissao;
-    }
-
-    public void setPercentualComissao(BigDecimal percentualComissao) {
-        this.percentualComissao = percentualComissao;
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 
     public boolean isAtivo() {
@@ -102,14 +98,6 @@ public class Funcionario {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public LocalDate getDataAdmissao() {
-        return dataAdmissao;
-    }
-
-    public void setDataAdmissao(LocalDate dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
     }
 
     public LocalDateTime getDataCadastro() {
