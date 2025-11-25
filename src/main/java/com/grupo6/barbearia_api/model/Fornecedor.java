@@ -35,4 +35,6 @@ public class Fornecedor {
 
     @Column(name = "data_cadastro", nullable = false, updatable = false)
     private LocalDateTime dataCadastro = LocalDateTime.now();
+
+    
 }
