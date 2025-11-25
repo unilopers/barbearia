@@ -10,3 +10,4 @@ A aplicação utiliza o framework Spring Boot e segue rigorosamente o padrão ar
 - Pedro Alpino Levandowski
 - Lucas José Gomes Oliveira
 - Enzo Gardenal Fenato
+- Marcos Vinicios Florencio de Oliveira
