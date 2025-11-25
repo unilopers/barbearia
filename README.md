@@ -7,3 +7,4 @@ A aplicação utiliza o framework Spring Boot e segue rigorosamente o padrão ar
 
 👥 Integrantes do Grupo:
 - Fernando Ferreira Costa Junior
+- Pedro Alpino Levandowski
