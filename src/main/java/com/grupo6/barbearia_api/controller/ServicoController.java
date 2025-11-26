@@ -1,4 +1,4 @@
-package com.grupo6.barbearia_api.Controller;
+package com.grupo6.barbearia_api.controller;
 
 import com.grupo6.barbearia_api.model.Servico;
 import com.grupo6.barbearia_api.view.ServicoView;
