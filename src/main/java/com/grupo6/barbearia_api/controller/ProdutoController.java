@@ -1,6 +1,6 @@
-package br.com.unilopers.barbearia_api.controller;
-import br.com.unilopers.barbearia_api.model.Produto;
-import br.com.unilopers.barbearia_api.repository.ProdutoView;
+package com.grupo6.barbearia_api.controller;
+import com.grupo6.barbearia_api.model.Produto;
+import com.grupo6.barbearia_api.view.ProdutoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
