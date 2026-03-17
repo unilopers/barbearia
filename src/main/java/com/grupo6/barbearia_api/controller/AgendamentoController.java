@@ -6,6 +6,7 @@ import com.grupo6.barbearia_api.view.AgendamentoView;
 import com.grupo6.barbearia_api.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class AgendamentoController {
     @Autowired
     private AgendamentoService agendamentoService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO', 'CLIENTE')")
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody AgendamentoRequestDTO dto) {
         try {
@@ -74,6 +76,7 @@ public class AgendamentoController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<?> listar() {
         try {
@@ -102,6 +105,7 @@ public class AgendamentoController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO', 'CLIENTE')")
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
@@ -127,6 +131,7 @@ public class AgendamentoController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @PutMapping("/{id}/status")
     public ResponseEntity<?> atualizarStatus(@PathVariable Long id, @RequestParam String status) {
         try {
@@ -171,6 +176,7 @@ public class AgendamentoController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id) {
         try {
