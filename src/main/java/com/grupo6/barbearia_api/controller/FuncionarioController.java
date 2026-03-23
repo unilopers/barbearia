@@ -4,6 +4,7 @@ import com.grupo6.barbearia_api.model.Funcionario;
 import com.grupo6.barbearia_api.view.FuncionarioView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioView funcionarioView;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<?> listar() {
         try {
@@ -44,7 +46,7 @@ public class FuncionarioController {
         }
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
@@ -65,7 +67,7 @@ public class FuncionarioController {
             ));
         }
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> criar(@RequestBody Funcionario funcionario) {
@@ -86,7 +88,7 @@ public class FuncionarioController {
             ));
         }
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Funcionario funcionario) {
         try{
@@ -113,7 +115,7 @@ public class FuncionarioController {
             ));
         }
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id) {
         try{

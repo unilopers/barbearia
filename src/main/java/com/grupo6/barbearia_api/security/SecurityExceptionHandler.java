@@ -23,17 +23,4 @@ public class SecurityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
     }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleGeneralException(Exception ex) {
-        if (ex.getMessage().contains("Unauthorized") || ex.getMessage().contains("Full authentication is required")) {
-            Map<String, Object> body = new LinkedHashMap<>();
-            body.put("timestamp", LocalDateTime.now());
-            body.put("status", HttpStatus.UNAUTHORIZED.value());
-            body.put("error", "Unauthorized");
-            body.put("message", "Token ausente ou inválido.");
-            return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
-        }
-        throw new RuntimeException(ex);
-    }
 }

@@ -4,6 +4,7 @@ import com.grupo6.barbearia_api.model.Cliente;
 import com.grupo6.barbearia_api.view.ClienteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class ClienteController {
 
     @Autowired
     private ClienteView clienteView;
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<?> listar() {
         try {
@@ -43,6 +45,7 @@ public class ClienteController {
             ));
         }
     }
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
@@ -65,6 +68,7 @@ public class ClienteController {
             ));
         }
     }
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Cliente cliente) {
         try {
@@ -83,6 +87,7 @@ public class ClienteController {
             ));
         }
     }
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
         try {
@@ -110,6 +115,7 @@ public class ClienteController {
             ));
         }
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id) {
         try {
