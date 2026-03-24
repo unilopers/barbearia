@@ -23,7 +23,7 @@ public class Fornecedor {
     private String email;
 
     @Column (length = 225)
-    private String endereço;
+    private String endereco;
 
     @Lob
     private String observacoes;
@@ -76,12 +76,12 @@ public class Fornecedor {
         this.email = email;
     }
 
-    public String getEndereço() {
-        return endereço;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getObservacoes() {
