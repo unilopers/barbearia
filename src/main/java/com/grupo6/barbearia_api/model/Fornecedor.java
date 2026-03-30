@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +23,8 @@ public class Fornecedor {
     @Column(length = 100)
     private String email;
 
-    @Column (length = 225)
-    private String endereço;
+    @Column(length = 225)
+    private String endereco;
 
     @Lob
     private String observacoes;
@@ -34,8 +35,12 @@ public class Fornecedor {
     @Column(name = "data_cadastro", nullable = false, updatable = false)
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
-    
-    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatusFornecedor status = StatusFornecedor.PENDENTE;
+
+    // GETTERS E SETTERS
+
     public Long getId() {
         return id;
     }
@@ -67,7 +72,7 @@ public class Fornecedor {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-  
+
     public String getEmail() {
         return email;
     }
@@ -76,12 +81,12 @@ public class Fornecedor {
         this.email = email;
     }
 
-    public String getEndereço() {
-        return endereço;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getObservacoes() {
@@ -90,6 +95,14 @@ public class Fornecedor {
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
+    }
+
+    public StatusFornecedor getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusFornecedor status) {
+        this.status = status;
     }
 
     public boolean isAtivo() {
@@ -107,5 +120,4 @@ public class Fornecedor {
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
-
 }
