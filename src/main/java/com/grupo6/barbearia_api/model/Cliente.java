@@ -7,6 +7,17 @@ import java.time.LocalDateTime;
 @Table(name = "cliente")
 
 public class Cliente {
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getNome() {
         return nome;
     }

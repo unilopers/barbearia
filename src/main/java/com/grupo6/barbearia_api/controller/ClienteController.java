@@ -2,6 +2,8 @@ package com.grupo6.barbearia_api.controller;
 
 import com.grupo6.barbearia_api.model.Cliente;
 import com.grupo6.barbearia_api.view.ClienteView;
+import com.grupo6.barbearia_api.service.ClienteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.net.URI;
 import java.util.Map;
 
 @RestController
@@ -18,6 +21,10 @@ public class ClienteController {
 
     @Autowired
     private ClienteView clienteView;
+
+    @Autowired
+    private com.grupo6.barbearia_api.service.ClienteService clienteService;
+
     @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<?> listar() {
@@ -72,7 +79,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Cliente cliente) {
         try {
-            Cliente salvo = clienteView.save(cliente);
+            Cliente salvo = clienteService.criarCliente(cliente);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(criarResposta(
                     "sucesso",
