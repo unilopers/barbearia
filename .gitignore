@@ -35,6 +35,4 @@ build/
 ### VS Code ###
 .vscode/
 
-.postman/
-postman/
 __pycache__/

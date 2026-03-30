@@ -1,8 +1,6 @@
 package com.grupo6.barbearia_api.controller;
 
 import com.grupo6.barbearia_api.model.Fornecedor;
-import com.grupo6.barbearia_api.service.FornecedorAsyncService;
-import com.grupo6.barbearia_api.service.FornecedorService;
 import com.grupo6.barbearia_api.view.FornecedorView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +18,6 @@ public class FornecedorController {
 
     @Autowired
     private FornecedorView fornecedorView;
-
-    @Autowired
-    private FornecedorService fornecedorService;
-
-    @Autowired
-    private FornecedorAsyncService fornecedorAsyncService;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @GetMapping
@@ -85,19 +77,13 @@ public class FornecedorController {
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Fornecedor fornecedor) {
         try {
-
-            // salva fornecedor com status PENDENTE
-            Fornecedor novo = fornecedorService.salvar(fornecedor);
-
-            // dispara validação em background
-            fornecedorAsyncService.validarCnpjAsync(novo);
+            Fornecedor salvo = fornecedorView.save(fornecedor);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(criarResposta(
                     "sucesso",
-                    "Fornecedor criado e em validação",
-                    novo
+                    "Fornecedor '" + salvo.getNome() + "' criado com sucesso",
+                    salvo
             ));
-
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(criarResposta(
                     "erro",
