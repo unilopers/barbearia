@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .env
+__pycache__/
+*.pyc
 
 ### STS ###
 .apt_generated
