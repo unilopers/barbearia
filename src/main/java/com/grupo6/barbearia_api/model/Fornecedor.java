@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,8 +35,12 @@ public class Fornecedor {
     @Column(name = "data_cadastro", nullable = false, updatable = false)
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
-    
-    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatusFornecedor status = StatusFornecedor.PENDENTE;
+
+    // GETTERS E SETTERS
+
     public Long getId() {
         return id;
     }
@@ -67,7 +72,7 @@ public class Fornecedor {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-  
+
     public String getEmail() {
         return email;
     }
@@ -92,6 +97,14 @@ public class Fornecedor {
         this.observacoes = observacoes;
     }
 
+    public StatusFornecedor getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusFornecedor status) {
+        this.status = status;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -107,5 +120,4 @@ public class Fornecedor {
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
-
 }
