@@ -87,7 +87,7 @@ public class FornecedorController {
         try {
 
             // salva fornecedor com status PENDENTE
-            Fornecedor novo = fornecedorService.salvar(fornecedor);
+            Fornecedor novo = fornecedorService.criarFornecedor(fornecedor);
 
             // dispara validação em background
             fornecedorAsyncService.validarCnpjAsync(novo);
